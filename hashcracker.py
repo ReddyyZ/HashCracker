@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
 import argparse, textwrap, hashlib, threading, os, sys, time
 import hashid, bcrypt
 
 __clear__   = lambda : os.system("cls" if os.name == "nt" else "clear")
-__version__ = "v1.0.0"
+__version__ = "v1.0.1"
 
 hashs_ = {
     "md5": lambda text : hashlib.md5(text.encode()).hexdigest(),
@@ -48,7 +49,7 @@ def brute(_hash,passwd,hash_type, t_num, salt=None):
     print(f"[Thread: {t_num}] Testing: {_hash}:{passwd}")
 
     if not salt:
-        result = hashs_[hash_type](passwd).decode()
+        result = hashs_[hash_type](passwd)
     else:
         result = hashs_[hash_type](passwd,salt).decode()
 
